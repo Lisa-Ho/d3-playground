@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta chartset="utf-8">
+        <title>D3 Page Template</title>
+        <!--Local script: <script type="text/javascript" src="d3.js"></script> -->
+        <script type="text/javascript" src="https://d3js.org/d3.v6.js"></script>
+    </head>
+    <body>
+        <h1>Test heading</h1>
+        <script>
+            let dataset = [56, 49, 45, 42, 21, 20, 20, 19]
+
+            // binding data and printing each value
+            d3.select("body").selectAll("p")
+                .data(dataset)
+                .enter()
+                .append("p")
+                .text(function(d) {
+                    return("I can count up to " + d); 
+                })
+                .style("color", function(d) {
+                    if(d > 35 && d < 50) {
+                        return "red";
+                    } else {
+                        return "black"
+                    }
+                });
+
+        </script>
+    </body>
+</html>

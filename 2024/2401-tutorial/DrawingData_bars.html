@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta chartset="utf-8">
+        <title>D3 Page Template</title>
+        <!--Local script: <script type="text/javascript" src="d3.js"></script> -->
+        <script type="text/javascript" src="https://d3js.org/d3.v6.js"></script>
+        <style>
+            svg {
+                padding-left: 30px
+            }
+
+        </style>
+    </head>
+    <body>
+        <h1>Test heading</h1>
+
+        <script>
+            // data
+            const dataset = [75, 49, 45, 42, 21, 20, 8, 19, 31] 
+
+            // draw svg
+            const w = 500;
+            const h = 180; 
+            const barPadding = 20;
+
+            const svg = d3.select("body")
+                        .append("svg")
+                        .attr("width", w)
+                        .attr("height", h)
+
+            // draw rectangles
+            let rect = svg.selectAll("rect")
+                .data(dataset)
+                .enter()
+                .append("rect")
+                // color based on value
+                .attr("fill", function(d){
+                    color = "rgb(0, 0, " + Math.round(20000/d**1.5) + ")";
+                    console.log(color);
+                    return color;
+                })
+
+            rect.attr("x", function(d,i){
+                    return i * (w/ dataset.length);
+                })
+                .attr("y", function(d){
+                    return h-(d*2);
+                })
+                .attr("width",(w/ dataset.length - barPadding))
+                .attr("height", function(d){
+                    return d*2 ;
+                })
+
+            // add labels
+            svg.selectAll("text")
+                .data(dataset)
+                .enter()
+                .append("text")
+                .text(function(d){
+                    return d
+                })
+                .attr("x", function(d,i){
+                    return i * (w / dataset.length) + 8;
+                })
+                .attr("y", function(d){
+                    return h-(d*2) - 12;
+                })
+
+        </script>
+    </body>
+</html>

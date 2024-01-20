@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta chartset="utf-8">
+        <title>D3 Page Template</title>
+        <!--Local script: <script type="text/javascript" src="d3.js"></script> -->
+        <script type="text/javascript" src="https://d3js.org/d3.v6.js"></script>
+        <style>
+            div.bar {
+                display : inline-block;
+                width: 20px;
+                height: 75px;
+                background-color: teal;
+                margin-right: 4px
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Test heading</h1>
+
+        <script>
+            let dataset = [56, 49, 45, 42, 21, 20, 20, 19]
+
+            // binding data and printing each value
+            d3.select("body").selectAll("div")
+                .data(dataset)
+                .enter()
+                .append("div")
+                .attr("class", "bar")
+                .style("height", function(d){
+                    barheight = d*3 // scale values
+                    return barheight + "px";
+                });
+
+        </script>
+    </body>
+</html>
