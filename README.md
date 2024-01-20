@@ -17,13 +17,13 @@ Open http://localhost:8888/ in your web browser.
 
 ### Load d3.js
 
-Option 1: Download files to work locally from [here](https://d3js.org/getting-started#try-d3-online), then load into html file: 
+Option 1: Download files to work locally from [here](https://d3js.org/d3.v6.js)), then load into html file: 
 
 `<script src="d3.js"></script>`
 
 Option 2: Import from web 
 
-`<script src="https://cdn.jsdelivr.net/npm/d3@7"></script>`
+`<script src="https://d3js.org/d3.v6.js"></script>`
 
 ### Commenting out
 
