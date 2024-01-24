@@ -6,39 +6,63 @@
         <!--Local script: <script type="text/javascript" src="d3.js"></script> -->
         <script type="text/javascript" src="https://d3js.org/d3.v6.js"></script>
         <style>
+            .bxis { 
+                color: #171717; 
+                font-family: "Inter";
+                font-size: 12px;
+            }
+
+            .legend {
+                font-family: "Inter"; 
+                font-weight :  400; 
+                font-size : 12px;
+            }
 
         </style>
     </head>
     <body>
-        <h1>Test Lollipop</h1>
 
         <script>
-        // Source: https://d3-graph-gallery.com/graph/lollipop_cleveland.html
-        
+        /* Source: https://d3-graph-gallery.com/graph/lollipop_cleveland.html
+        Legend examples
+        - https://medium.com/code-kings/adding-legend-to-d3-chart-b06f2ae8667 
+        - https://zeroviscosity.com/d3-js-step-by-step/step-3-adding-a-legend
+        - https://d3-graph-gallery.com/graph/custom_legend.html
+        */
+
         // set the dimensions and margins of the graph
-        const margin = {top: 10, right: 30, bottom: 30, left: 250},
-            width = 860 - margin.left - margin.right,
-            height = 500 - margin.top - margin.bottom;
+        const margin = {top: 120, right: 30, bottom: 70, left: 280},
+            width = 900 - margin.left - margin.right,
+            height = 550 - margin.top - margin.bottom;
 
         // append the svg object to the body of the page
         const svg = d3.select("body")
             .append("svg")
                 .attr("width", width + margin.left + margin.right)
                 .attr("height", height + margin.top + margin.bottom)
+                .style("background-color", "#FFFFFF")
+                
             .append("g")
-                .attr("transform", `translate(${margin.left}, ${margin.top})`);
+                .attr("transform", `translate(${margin.left}, ${margin.top})`)
+                
 
         // Parse the Data
-        d3.csv("MakeoverMonday_New_Years_Resolutions_new2.csv").then(function(data) {
-
+        d3.csv("MakeoverMonday_New_Years_Resolutions.csv").then(function(data) {
             console.log(data)
+
             // Add X axis
             const x = d3.scaleLinear()
                 .domain([0, 70])
                 .range([ 0, width]);
+            const xaxis = d3.axisBottom(x)
+                .ticks(5)
+                .tickFormat(d => d + "%");
             svg.append("g")
                 .attr("transform", `translate(0, ${height})`)
-                .call(d3.axisBottom(x))
+                //.attr("class", "axis")
+                .call(xaxis)
+                .attr("font-family", "Inter")
+                .attr("font-size", "12px")
 
             // Y axis
             const y = d3.scaleBand()
@@ -47,7 +71,10 @@
                 .padding(1);
             svg.append("g")
                 .call(d3.axisLeft(y))
+                .attr("font-family", "Inter")
+                .attr("font-size", "12px")
 
+        
             // Lines
             svg.selectAll("myline")
                 .data(data)
@@ -88,6 +115,76 @@
                 .attr("cy", function(d) { return y(d.Resolution); })
                 .attr("r", "6")
                 .style("fill", "#4C4082")
+
+            // Title
+            svg.append("text")
+                .attr("x", 0)          
+                .attr("y", 0 - (margin.top / 1.5))
+                .style("font-size", "18px") 
+                .style("font-family", "Inter") 
+                .attr("font-weight", 600)
+                .text("Health and fitness top the list of new years resolutions in Britain");
+
+            svg.append("text")
+                .attr("x", 0)          
+                .attr("y", 0 - (margin.top / 1.5) + 30)
+                .style("font-size", "16px") 
+                .style("font-family", "Inter") 
+                .attr("font-weight", 400)
+                .text("New years resolutions for 2024 of Britons by gender (%)");
+
+            // Footer
+            svg.append("text")
+                .attr("x", 0)          
+                .attr("y", height + margin.bottom -10)
+                .attr("text-anchor", "center")  
+                .style("font-size", "12px") 
+                .style("font-family", "Inter")
+                .attr("font-weight", 500)
+                .text("Source: ")
+                .append("tspan")
+                .attr("font-weight", 300)
+                 .text("YouGov #MakeoverMonday | ")
+                 .append("tspan")
+                 .attr("font-weight", 500)
+                 .text("Design: ")
+                .append("tspan")
+                .attr("font-weight", 300)
+                 .text("Lisa Hornung ")
+
+            // Legend
+            const legendSize = 6;
+            const legendSpacing = 80;
+            const keys = ["Female", "Male" ]
+            colors = ["#4C4082", "#69b3a2"]
+
+            const legend = svg.selectAll("myItems")
+                .data(keys)                                   
+                .enter() 
+                .append('g')
+                //.attr('class', 'legend')
+                .attr('transform', function(d, i) {
+                    const width = legendSize + legendSpacing;
+                    const vert = -20 ;
+                    const horz = i * width + 20;
+                    return 'translate(' + horz + ',' + vert + ')';
+                    });
+
+            legend.append('circle')
+                .attr("x", 0)
+                .attr("y", 0)
+                .attr('r', legendSize)
+                .style('fill', "#333333")
+                .style("fill", function(d, i){ return colors[i]})
+
+            legend.append('text')                                    
+                .attr('x', legendSize + 4)              
+                .attr('y', legendSize - 1)   
+                .text(function(d) { return d;})
+                .attr("font-family", "Inter")
+                .attr("font-size", "12px")
+                .attr("font-weight", 400)
+
             })
 
         </script>
