@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta chartset="utf-8">
+        <title>D3 Page Template</title>
+        <!--Local script: <script type="text/javascript" src="d3.js"></script> -->
+        <script type="text/javascript" src="https://d3js.org/d3.v6.js"></script>
+        <style>
+            svg {
+                padding-left: 30px
+            }
+
+            .axis text {
+                font-weight: bold;
+                font-size: 14px
+            }
+
+        </style>
+    </head>
+    <body>
+        <h1>Test heading</h1>
+
+        <script>
+            // data
+            //const dataset = [[5,20],[480,90], [250,50], [100, 33], [330,95], [410,12], [475,44], [25,67], [85,21], [5,20],[220,88], [600,150]] 
+            
+            // test with randomised dataset
+            const dataset = [];
+            const numDataPoints = 25;
+            const xRange = Math.random() *1000;
+            const yRange = Math.random() *1000;
+            for (var i=0; i < numDataPoints; i++) {
+                var newNumber1 = Math.floor(Math.random() * xRange);
+                var newNumber2 = Math.floor(Math.random() * yRange); 
+                dataset.push([newNumber1, newNumber2]);
+            }
+
+            // draw svg
+            const w = 600;
+            const h = 300; 
+            const svg = d3.select("body")
+                        .append("svg")
+                        .attr("width", w)
+                        .attr("height", h)
+            const padding=40;
+
+            // scales
+            const xScale = d3.scaleLinear()
+                            .domain([0, d3.max(dataset, function(d){ return d[0]})])
+                            .range([padding,w-padding*2])
+            const yScale = d3.scaleLinear()
+                            .domain([0, d3.max(dataset, function(d){ return d[1]})])
+                            .range([h-padding,padding])
+            // area scale: scales size of circles according to area not radius
+            const aScale = d3.scaleSqrt()
+                            .domain([0, d3.max(dataset, function(d){ return d[1]})])
+                            .range([0,10])
+
+            // axes
+            const xAxis = d3.axisBottom(xScale)
+                            .ticks(5)
+                            //.tickValues([0,100,200,500])
+                            //.tickFormat(d3.format(".1%"))
+   
+            const yAxis = d3.axisLeft(yScale)
+                            .ticks(5)
+
+            // draw rectangles
+            let circle = svg.selectAll("circle")
+                .data(dataset)
+                .enter()
+                .append("circle")
+                // color based on value
+                .attr("fill", function(d){
+                    color = "blue";
+                    return color;
+                })
+
+            circle.attr("cx", function(d){
+                return xScale(d[0]);
+                })
+                .attr("cy", function(d){
+                return yScale(d[1])
+                })
+                .attr("r", function(d) {
+                    return aScale(d[1])
+                })
+                .style("fill-opacity",  0.5)
+                .style("stroke","black")
+                .style("stroke-width", .75)
+
+            // Labels
+            /*svg.selectAll("text")
+                .data(dataset)
+                .enter()
+                .append("text")
+                .text(function(d){
+                    return d[0] + "," + d[1]
+                })
+                .attr("x", function(d){
+                    return xScale(d[0]);
+                })
+                .attr("y", function(d){
+                    return yScale(d[1])
+                })
+                .attr("font-family", "sans-serif")
+                .attr("fontsize", "9px")
+                .attr("fill", "black") */
+            
+            // call axes
+            svg.append("g")
+                .attr("class", "axis")
+                .attr("transform", `translate(0,${h-padding})`)
+                .call(xAxis)
+            
+                svg.append("g")
+                .attr("class", "axis")
+                .attr("transform", `translate(${padding},0)`)
+                .call(yAxis)
+            
+
+        </script>
+    </body>
+</html>

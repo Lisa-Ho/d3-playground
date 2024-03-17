@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta chartset="utf-8">
+        <title>D3 Page Template</title>
+        <!--Local script: <script type="text/javascript" src="d3.js"></script> -->
+        <script type="text/javascript" src="https://d3js.org/d3.v6.js"></script>
+        <style>
+            svg {
+                padding-left: 30px;
+                padding-right: 10px;
+            }
+
+        </style>
+    </head>
+    <body>
+        <h1>Test heading</h1>
+
+        <script>          
+            // draw svg
+            const w = 550;
+            const h = 250; 
+            const padding=20;
+
+            const svg = d3.select("body")
+                        .append("svg")
+                        .attr("width", w)
+                        .attr("height", h)
+
+			//For converting strings to Dates
+			const parseTime = d3.timeParse("%m/%d/%y");
+
+			//For converting Dates to strings
+			const formatTime = d3.timeFormat("%e %b %Y");
+
+			//Function for converting CSV values from strings to Dates and numbers
+			const rowConverter = function(d) {
+				return {
+					Date: parseTime(d.Date),
+					Amount: parseInt(d.Amount)
+				};
+			}            
+            // Parse the Data
+            d3.csv("time_scale_data.csv", rowConverter).then(function(dataset) {
+
+                console.log(dataset);
+				
+                //Create scales
+				xScale = d3.scaleTime()
+							   .domain([
+									d3.min(dataset, function(d) { return d.Date; }),
+									d3.max(dataset, function(d) { return d.Date; })
+								])
+							   .range([padding, w - padding*3]);
+
+				yScale = d3.scaleLinear()
+							   .domain([
+									d3.min(dataset, function(d) { return d.Amount; }),
+									d3.max(dataset, function(d) { return d.Amount; })
+								])
+							   .range([h - padding, padding]);
+
+
+                //Generate date labels first, so they are in back
+ 				svg.selectAll("text")
+ 				   .data(dataset)
+ 				   .enter()
+ 				   .append("text")
+ 				   .text(function(d) {
+ 				   		return formatTime(d.Date);
+ 				   })
+ 				   .attr("x", function(d) {
+ 				   		return xScale(d.Date) + 4;
+ 				   })
+ 				   .attr("y", function(d) {
+ 				   		return yScale(d.Amount) + 4;
+ 				   })
+ 				   .attr("font-family", "sans-serif")
+ 				   .attr("font-size", "11px")
+ 				   .attr("fill", "#bbb");
+
+				//Generate circles last, so they appear in front
+				svg.selectAll("circle")
+				   .data(dataset)
+				   .enter()
+				   .append("circle")
+				   .attr("cx", function(d) {
+				   		return xScale(d.Date);
+				   })
+				   .attr("cy", function(d) {
+				   		return yScale(d.Amount);
+				   })
+				   .attr("r", 2);
+                })
+
+
+
+        </script>
+    </body>
+</html>
