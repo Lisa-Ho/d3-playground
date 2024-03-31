@@ -25,12 +25,12 @@
 			let dataset = [ 5, 10, 13, 19, 21, 25, 22, 18, 15, 13,
 							11, 12, 15, 20, 18, 17, 16, 18, 23, 25 ];
 
-			const xScale = d3.scaleBand()
+			let xScale = d3.scaleBand()
 							.domain(d3.range(dataset.length))
 							.rangeRound([0, w])
 							.paddingInner(0.05);
 
-			const yScale = d3.scaleLinear()
+			let yScale = d3.scaleLinear()
 							.domain([0, d3.max(dataset)])
 							.range([0, h]);
 			
@@ -82,14 +82,29 @@
 			   	.on("click", function() {
 
 					// new values for data set
-					let dataset = [11,12,15,20,18,17,16,18,23,25,
-								5,10,13,19,21,25,22,18,15,13]
+					//let dataset = [11,12,15,20,18,17,16,18,23,25,
+					//			5,10,13,19,21,25,22,18,15,13]
+
+					// test with randomised dataset on each click
+					let numValues = dataset.length
+					dataset = [];
+					maxValue =100;
+            		for (var i=0; i < numValues; i++) {
+                		var newNumber = Math.floor(Math.random() * maxValue);
+                		dataset.push(newNumber);
+					}
+					// update scales
+					yScale.domain([0,d3.max(dataset)])
 
 					// update all rects
 					svg.selectAll("rect")
 						.data(dataset)
 						.transition()
-						.duration(1000)
+						.delay(function(d,i){
+							return i/dataset.length *1000;
+						})
+						.duration(500)
+						.ease(d3.easeCubicInOut)
 						.attr("y", function(d) {
 			   				return h - yScale(d);
 			   			})
@@ -100,10 +115,15 @@
 							return "rgb(0,0, " + Math.round(d*10) + ")";
 						});
 
+					// update labels
 					svg.selectAll("text")
 						.data(dataset)
 						.transition()
-						.duration(1000)
+						.delay(function(d,i){
+							return i/dataset.length *1000;
+						})
+						.duration(500)
+						.ease(d3.easeCubicInOut)
 						.text(function(d) {
 								console.log(d)
 								return d;
@@ -112,9 +132,20 @@
 			   					return xScale(i) + xScale.bandwidth() / 2;
 			   			})
 			   			.attr("y", function(d) {
-			   					return h - yScale(d) +14;
-			   			})
+							if(d < d3.max(dataset)*0.08) {
+                        		return h - yScale(d) - 5;
+                    			} else {
+                        	return h - yScale(d) +14;
+						}})
+						.attr("fill", function(d){
+							if(d<d3.max(dataset)*0.08) {
+								return "black"
+							} else {
+								return "white"
+							}
+						})					
 				});
+
 			   //console.log(dataset)
 		</script>
 	</body>
