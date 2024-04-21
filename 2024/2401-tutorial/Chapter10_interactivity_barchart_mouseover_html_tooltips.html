@@ -11,13 +11,48 @@
                 padding-right: 10px;
             }
 
+			rect:hover {
+				fill: orange;
+			}
+
+			#tooltip {
+				position: absolute;
+				width: 200px;
+				height: auto;
+				padding: 10px;
+				background-color: white;
+				-webkit-border-radius: 10px;
+				-moz-border-radius: 10px;
+				border-radius: 10px;
+				-webkit-box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+				-moz-box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+				box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+				pointer-events: none;
+			}
+			
+			#tooltip.hidden {
+				display: none;
+			}
+			
+			#tooltip p {
+				margin: 0;
+				font-family: sans-serif;
+				font-size: 16px;
+				line-height: 20px;
+			}
+
         </style>
     </head>
     <body>
+		<div id="tooltip" class="hidden">
+			<p><strong>Important Label Heading</strong></p>
+			<p><span id="value">100</span>%</p>
+		</div>
         <h1>Test heading</h1>
         <button type=button id="add">Add data</button>
         <button type=button id="remove">Remove data</button>
         <button type=button id="sort">Sort bars</button>
+
         <br>
         <br>
 
@@ -26,27 +61,8 @@
 			const w = 600;
 			const h = 250;
 			
-			let dataset = [ { key: 0, value: 5 },		//dataset is now an array of objects.
-							{ key: 1, value: 10 },		//Each object has a 'key' and a 'value'.
-							{ key: 2, value: 13 },
-							{ key: 3, value: 19 },
-							{ key: 4, value: 21 },
-							{ key: 5, value: 25 },
-							{ key: 6, value: 22 },
-							{ key: 7, value: 18 },
-							{ key: 8, value: 15 },
-							{ key: 9, value: 13 },
-							{ key: 10, value: 11 },
-							{ key: 11, value: 12 },
-							{ key: 12, value: 15 },
-							{ key: 13, value: 20 },
-							{ key: 14, value: 18 },
-							{ key: 15, value: 17 },
-							{ key: 16, value: 16 },
-							{ key: 17, value: 18 },
-							{ key: 18, value: 23 },
-							{ key: 19, value: 25 } ];
-
+			let dataset = [ 5, 10, 13, 19, 21, 25, 22, 18, 15, 13,
+							11, 12, 15, 20, 18, 17, 16, 18, 23, 25 ];
 
 			let xScale = d3.scaleBand()
 							.domain(d3.range(dataset.length))
@@ -54,13 +70,8 @@
 							.paddingInner(0.05);
 
 			let yScale = d3.scaleLinear()
-							.domain([0, d3.max(dataset, function(d){ return d.value})])
+							.domain([0, d3.max(dataset)])
 							.range([0, h]);
-
-            //Define key function, to be used when binding data
-			let key = function(d) {
-				return d.key;
-			};
 			
 			//Create SVG element
 			const svg = d3.select("body")
@@ -70,83 +81,97 @@
 
 			//Create bars
 			svg.selectAll("rect")
-			   .data(dataset, key)      //Bind data with custom key function
+			   .data(dataset)     
 			   .enter()
 			   .append("rect")
 			   .attr("x", function(d, i) {
 			   		return xScale(i);
-			   })
+			   	})
 			   .attr("y", function(d) {
-			   		return h - yScale(d.value);
-			   })
+			   		return h - yScale(d);
+			   	})
 			   .attr("width", xScale.bandwidth())
 			   .attr("height", function(d) {
-			   		return yScale(d.value);
-			   })
+			   		return yScale(d);
+			   	})
 			   .attr("fill", function(d) {
-					return "rgb(0, 0, " + Math.round(d.value * 10) + ")";
-			   })
-			   .on("click", function(){
-                    		sortBars();
-               				})
-               .on("mouseover", function(){
-                    d3.select(this)
-                        .attr("fill", "orange");
-               })
+					return "rgb(0, 0, " + Math.round(d * 10) + ")";
+			   	})
+               .on("click", function(){
+                    sortBars();
+               	})
+               .on("mouseover", function(d,i){
+
+					//let xPosition = parseFloat(d3.select(this).attr("x")) + x.Scale.bandwidth() / 2;
+					let xPosition = parseFloat(d3.select(this).attr("x")) + xScale.bandwidth() / 2;
+					let yPosition = parseFloat(d3.select(this).attr("y")) / 2 + h/2;
+
+					// update the tooltip position and value
+					d3.select("#tooltip")
+						.style("left", xPosition + "px")
+						.style("top", yPosition + "px")
+						.select("#value")
+						.text(i);
+					
+					// Show the tooltip
+					d3.select("#tooltip").classed("hidden", false);
+               	})
                .on("mouseout", function(){
-                    d3.select(this)
-                        .attr("fill", function(d) {
-					    return "rgb(0, 0, " + Math.round(d.value * 10) + ")";
+					//Hide the tooltip
+					d3.select("#tooltip").classed("hidden", true);
 			        })
-               });
+               	//})
+			   ;
 
 			//Create labels
 			svg.selectAll("text")
-			   .data(dataset, key)
+			   .data(dataset)
 			   .enter()
 			   .append("text")
 			   .text(function(d) {
-			   		return d.value;
+			   		return d;
 			   })
 			   .attr("text-anchor", "middle")
 			   .attr("x", function(d, i) {
 			   		return xScale(i) + xScale.bandwidth() / 2;
 			   })
 			   .attr("y", function(d) {
-			   		return h - yScale(d.value) + 14;
+			   		return h - yScale(d) + 14;
 			   })
 			   .attr("font-family", "sans-serif")
 			   .attr("font-size", "11px")
 			   .attr("fill", "white");
 			
+            //Define actions on button click
 			d3.selectAll("button")
 			   	.on("click", function() {
 
 					//See which p was clicked
 					let paragraphID = d3.select(this).attr("id");
 
-					//Decide what to do next
+					// Update or remove data
 					if (paragraphID == "add") {
 						//add new value to dataset
 						let newMaxValue = 25
 						let newNumber = Math.floor(Math.random()*newMaxValue);
-                        let lastKeyValue = dataset[dataset.length-1].key
-						dataset.push({
-                            key: lastKeyValue +1,
-                            value: newNumber
-                        });
+						dataset.push(newNumber);
 					}  if(paragraphID == "remove") {
 						//Remove a value
 						dataset.pop();	//Remove one value from dataset
+					}  if(paragraphID=="sort"){
+						svg.selectAll("rect")
+							.on("click", function(){
+                    		sortBars();
+               			})
 					}
 
 					// update scales
-					yScale.domain([0,d3.max(dataset, function(d){return d.value})])			//Recalibrate given new max
+					yScale.domain([0,d3.max(dataset)])			//Recalibrate given new max
 					xScale.domain(d3.range(dataset.length));	//Recalibrate given new length of dataset
 
 					//Select…
 					var bars = svg.selectAll("rect")			//Select all bars
-						.data(dataset, key);							//Re-bind data to existing bars, return the 'update' selection
+						.data(dataset);							//Re-bind data to existing bars, return the 'update' selection
 																//'bars' is now the update selection
 
 					// update all rects
@@ -154,25 +179,18 @@
 						.append("rect") 
 						.attr("x", w)
 						.attr("y", function(d) {
-			   				return h - yScale(d.value);
+			   				return h - yScale(d);
 			   			})
 						.attr("width", xScale.bandwidth())
 						.attr("height", function(d){
-							return yScale(d.value)
+							return yScale(d)
 						})
 						.attr("fill", function(d){
-							return "rgb(0,0, " + Math.round(d.value*10) + ")";
+							return "rgb(0,0, " + Math.round(d*10) + ")";
 						})
-                        .on("mouseover", function(){
-                            d3.select(this)
-                                .attr("fill", "orange");
-                            })
-                        .on("mouseout", function(){
-                            d3.select(this)
-                                .attr("fill", function(d) {
-					                return "rgb(0, 0, " + Math.round(d.value * 10) + ")";
-			                    })
-                        })
+						.on("click", function(){
+                    		sortBars();
+               				})
 						//update all bars with a transition
 						.merge(bars)
 						.transition()
@@ -181,12 +199,13 @@
 							return xScale(i);
 						})
 						.attr("y", function(d){
-							return h - yScale(d.value);
+							return h - yScale(d);
 						})
 						.attr("width", xScale.bandwidth())
 						.attr("height", function(d){
-							return yScale(d.value);
+							return yScale(d);
 						})
+
 					
 					//Exit…
 					bars.exit()
@@ -197,28 +216,28 @@
 					
 					//Select labels
 					var labels = svg.selectAll("text")			
-						.data(dataset, key);																		
+						.data(dataset);																		
 						
 					//update labels
 					labels.enter()
 						.append("text")
 						.text(function(d) {
-								return d.value;
+								return d;
 						})
 						.attr("text-anchor", "middle")
 						.attr("x", function(d, i) {
 			   					return xScale(i) + xScale.bandwidth()*2;
 			   			})
 			   			.attr("y", function(d) {
-							if(d.value < d3.max(dataset, function(d){return d.value})*0.08) {
-                        		return h - yScale(d.value) - 5;
+							if(d < d3.max(dataset)*0.08) {
+                        		return h - yScale(d) - 5;
                     			} else {
-                        	return h - yScale(d.value) +14;
+                        	return h - yScale(d) +14;
 						}})
 						.attr("font-family", "sans-serif")
 			   			.attr("font-size", "11px")
 						.attr("fill", function(d){
-							if(d.value <d3.max(dataset, function(d){return d.value})*0.08) {
+							if(d <d3.max(dataset)*0.08) {
 								return "black"
 							} else {
 								return "white"
@@ -231,35 +250,36 @@
 			   					return xScale(i) + xScale.bandwidth() / 2;
 			   			})
 			   			.attr("y", function(d) {
-							if(d.value < d3.max(dataset, function(d){return d.value})*0.08) {
-                        		return h - yScale(d.value) - 5;
+							if(d < d3.max(dataset)*0.08) {
+                        		return h - yScale(d) - 5;
                     			} else {
-                        	return h - yScale(d.value) +14;
+                        	return h - yScale(d) +14;
 						}})
 					
 					labels.exit()
 						.transition()
 						.duration(500)
 						.attr("x", -xScale.bandwidth())
-						.remove();				
+						.remove();
+                                       			
 				});
 
+
                 //define sort function
+                let sortOrder = false;
 
-				// set order state
-				let sortOrder = false;
-
-                let sortBars = function(d) {
-						// flip sort order
-						sortOrder = !sortOrder
+                let sortBars = function() {
+                        // flip sort order
+                        sortOrder = !sortOrder; 
 
                         svg.selectAll("rect")
                             .sort(function(a,b){
-								if(sortOrder){
-									return d3.ascending(a.value,b.value)
-								} else {
-									return d3.descending(a.value,b.value)
-								}
+                                if(sortOrder){
+                                    return d3.ascending(a,b)
+                                } else {
+                                    return d3.descending(a,b)
+                                }
+                                
                             })
                         .transition()
                         .duration(1000)
@@ -267,8 +287,6 @@
                             return xScale(i)
                         })
                 }
-
-
 
 
 			   console.log(dataset)

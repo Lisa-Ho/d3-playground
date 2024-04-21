@@ -75,11 +75,11 @@
 					    return "rgb(0, 0, " + Math.round(d * 10) + ")";
 			        })
                	})
-				/*default browser tooltips
+				//default browser tooltips
 				.append("title")
 			   	.text(function(d) {
 			   		return d;
-			   	}) */
+			   	})
 			   ;
 
 			//Create labels
@@ -159,14 +159,12 @@
                         		.attr("fill", function(d) {
 					    			return "rgb(0, 0, " + Math.round(d * 10) + ")";
 			        			})
-               				})
-							
-						/*default browser tooltips
+               				})	
+						//default browser tooltips
 						.append("title")
 			   			.text(function(d) {
 			   				return d;
-			   			}) */
-
+			   			}) 
 						//update all bars with a transition
 						.merge(bars)
 						.transition()

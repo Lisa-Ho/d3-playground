@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta chartset="utf-8">
+        <title>D3 Page Template</title>
+        <!--Local script: <script type="text/javascript" src="d3.js"></script> -->
+        <script type="text/javascript" src="https://d3js.org/d3.v6.js"></script>
+        <style>
+
+        </style>
+    </head>
+    <body>
+        <h1>Area chart</h1>
+        <script>
+        console.log("all good")
+        // load data
+        d3.csv("mauna_loa_co2_monthly_averages.csv").then(function(data) {
+            // print each row
+            //console.log(data.map(function(d) { return d.average; }))
+
+            // prepare data
+            data.forEach(function(d) {
+                d.average = +d.average;
+                d.newDate = new Date(parseInt(d.year), (parseInt(d.month)-1));
+                });
+
+            // print data as table in console
+            console.table(data, ["newDate", "average"])
+            console.log("still good")
+
+            
+        });
+        
+
+        </script>
+    </body>
