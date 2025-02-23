@@ -2,6 +2,8 @@
 
 Website made in Svelte hosting data visualisations made with D3. 
 
+Deployed website [here](https://d3-playground.netlify.app/).
+
 ## Helpful resources
 
 ### Guides and templates
