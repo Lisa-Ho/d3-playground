@@ -1,34 +1,57 @@
-# d3-playground
+# About this repo
 
-## Basics
+Website made in Svelte hosting data visualisations made with D3. 
 
-### Run local python server
+## Helpful resources
 
-Run these commands in your cmd prompt
+### Guides and templates
 
+- [Svelte starter on Github](https://github.com/the-pudding/svelte-starter/tree/main) (Pudding)
+- Connor Rothschild post on [Svelte and D3](https://connorrothschild.github.io/v3/post/svelte-and-d3)
+- [Overview of Svelte and D3 projects](https://awesome-svelte-and-d3.netlify.app/projects)
+- ([Svelte Charts](https://www.sveltecharts.com/)): Templates for charts in Svelte and D3 
+
+### Projects
+
+- Spiegel: Nobel Laureates ([Project](https://www.spiegel.de/wissenschaft/zirkel-der-genies-a-90c50289-30ac-4a4b-bc49-348676ce6687), [Code](https://github.com/spiegelgraphics/nobel-laureates/tree/main))
+- Jess Voiture for Pudding: Vogue magazine covers ([Project](https://mag-text.vercel.app/), [Code](https://github.com/jessvoiture/mag-text/tree/main))
+- Connor Rothschild: Bob Ross Art gallery ([Project](https://connorrothschild.github.io/bob-ross-art-gallery/), [Code](https://github.com/connorrothschild/bob-ross-art-gallery/tree/master))
+- Flore Perche: Tour de France ([Project](https://floreperche.github.io/tour-de-france-2024/), [Code](https://github.com/floreperche/tour-de-france-2024/tree/main))
+- Taiwan Data Stories ([Code](https://github.com/TaiwanDataStories/streetfood-svelte/tree/main/src/components))
+
+
+## Sveltekit project setup
+
+Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+
+### Install dependencies
+
+```bash
+# create a new project in the current directory
+npx sv create
+
+# create a new project in my-app
+npx sv create my-app
 ```
-cd project-folder
+### Developing
+
+Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+
+```bash
+npm run dev
+
+# or start the server and open the app in a new browser tab
+npm run dev -- --open
 ```
+
+### Building
+
+To create a production version of your app:
+
+```bash
+npm run build
 ```
-python -m http.server 8888 &.
-```
 
-Open http://localhost:8888/ in your web browser.
+You can preview the production build with `npm run preview`.
 
-### Load d3.js
-
-Option 1: Download files to work locally from [here](https://d3js.org/d3.v6.js)), then load into html file: 
-
-`<script src="d3.js"></script>`
-
-Option 2: Import from web 
-
-`<script src="https://d3js.org/d3.v6.js"></script>`
-
-### Commenting out
-
-- html: ` <!-- Comments here -->`
-- css: `/* Comments here */`
-- Javascript: `// Comments here`
-
-- 
+> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
