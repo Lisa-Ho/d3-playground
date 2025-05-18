@@ -6,7 +6,7 @@
 
 <section id="demo-link">
 	<h2>Index</h2>
-	<p><a href="bar-chart">Bar chart</a></p>
+	<p><a href="tutorial-newline">Newline Tutorial</a></p>
 </section>
 
 
