@@ -9,9 +9,15 @@ Deployed website [here](https://d3-playground.netlify.app/).
 ### Guides and templates
 
 - [Svelte starter on Github](https://github.com/the-pudding/svelte-starter/tree/main) (Pudding)
+- [Svelte starter on Github](https://github.com/higsch/svelte-d3-starter) (Matthias Stahl)
 - Connor Rothschild post on [Svelte and D3](https://connorrothschild.github.io/v3/post/svelte-and-d3)
 - [Overview of Svelte and D3 projects](https://awesome-svelte-and-d3.netlify.app/projects)
 - ([Svelte Charts](https://www.sveltecharts.com/)): Templates for charts in Svelte and D3 
+
+### Tutorials
+
+- [Svelte + D3 training](https://www.youtube.com/watch?v=2-Zw_QGTrlU&list=PLNvnDrMLMSipfbxSp1Z4v9Ydu2ud5i9V8&index=1) by Matthias Stahl on YouTube
+- [Your first data visualization with Svelte & D3](https://www.youtube.com/watch?v=-THp2YVYEFc) by Connor Rothschild for Newline on YouTube
 
 ### Projects
 
