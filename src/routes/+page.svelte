@@ -5,8 +5,12 @@
 <Header/>
 
 <section id="demo-link">
-	<h2>Index</h2>
-	<p><a href="tutorial-newline">Newline Tutorial</a></p>
+	<h2>Tutorials</h2>
+  <ul>
+    <li><a href="tutorial-newline">Connor Rothschild/Newline</a></li>
+    <li><a href="tutorial-mstahl">Matthias Stahl</a></li>
+  </ul>
+
 </section>
 
 
@@ -17,7 +21,7 @@ section {
   margin: auto;   
 }
 
-section p {
+section p, li {
     font-family: 'Poppins', sans-serif;
     font-weight: 300; 
     font-size: 1.15rem;
