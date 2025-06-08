@@ -1,5 +1,7 @@
 <script>
 import Circles from "../../components/tutorial-mstahl/Circles.svelte"
+import CirclesCanvas from "../../components/tutorial-mstahl/CirclesCanvas.svelte"
+import Voronoi from "../../components/tutorial-mstahl/Voronoi.svelte"
 </script>
 
 <main>
@@ -16,7 +18,20 @@ import Circles from "../../components/tutorial-mstahl/Circles.svelte"
     <section class="circles">
         <h2>Circles</h2>    
         <Circles/>
+        <!---->
     </section>
+
+    <section class="circlesCanvas">
+        <h2>Circles with canvas</h2>  
+        <p>Note: Animation not fully working</p>  
+        <CirclesCanvas/>
+        <!---->
+    </section>
+
+    <section class="voronoi">
+        <h2>Voronoi</h2>  
+    </section>
+        
 </main>
 
 

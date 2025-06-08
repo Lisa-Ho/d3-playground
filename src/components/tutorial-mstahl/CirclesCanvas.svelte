@@ -1,9 +1,9 @@
 <script>
     import {scaleLinear} from 'd3';
-    import Circle from "./Circle.svelte";
+    import Circle from "./CircleCanvas.svelte";
     import Canvas from "./Canvas.svelte"
 
-    let data = Array.from({length: 500}).map(() => {
+    let data = Array.from({length: 1000}).map(() => {
         return {
             a: Math.random(),  
             b: Math.random(),  
@@ -13,7 +13,7 @@
         });
 
     setInterval(() => {
-        data = Array.from({length: 500}).map(() => {
+        data = Array.from({length: 1000}).map(() => {
         return {
             a: Math.random(),  
             b: Math.random(),  
@@ -42,7 +42,7 @@
     
     <div bind:clientWidth={width}
         >
-        <svg width={width} height={height}>
+        <Canvas width={width} height={height}>
             {#each data as {a, b, r, fill}}
                 <Circle
                     x={xScale(a)}
@@ -51,7 +51,7 @@
                     fill={fill}
                 />
             {/each}
-        </svg>
+        </Canvas>
     </div>
     
 <style>
