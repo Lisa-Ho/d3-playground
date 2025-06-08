@@ -21,15 +21,9 @@ import Voronoi from "../../components/tutorial-mstahl/Voronoi.svelte"
         <!---->
     </section>
 
-    <section class="circlesCanvas">
-        <h2>Circles with canvas</h2>  
-        <p>Note: Animation not fully working</p>  
-        <CirclesCanvas/>
-        <!---->
-    </section>
-
     <section class="voronoi">
         <h2>Voronoi</h2>  
+        <Voronoi/>
     </section>
         
 </main>
