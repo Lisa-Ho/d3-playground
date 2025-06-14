@@ -2,6 +2,7 @@
 import Circles from "../../components/tutorial-mstahl/Circles.svelte"
 import CirclesCanvas from "../../components/tutorial-mstahl/CirclesCanvas.svelte"
 import Voronoi from "../../components/tutorial-mstahl/Voronoi.svelte"
+import Map from "../../components/tutorial-mstahl/Map.svelte"
 </script>
 
 <main>
@@ -24,8 +25,12 @@ import Voronoi from "../../components/tutorial-mstahl/Voronoi.svelte"
     <section class="voronoi">
         <h2>Voronoi</h2>  
         <Voronoi/>
+        <!---->
     </section>
-        
+
+    <section class="Map">
+        <h2>Map</h2>  
+        <Map/>
 </main>
 
 
