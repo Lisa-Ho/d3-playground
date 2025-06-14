@@ -3,6 +3,7 @@ import Circles from "../../components/tutorial-mstahl/Circles.svelte"
 import CirclesCanvas from "../../components/tutorial-mstahl/CirclesCanvas.svelte"
 import Voronoi from "../../components/tutorial-mstahl/Voronoi.svelte"
 import Map from "../../components/tutorial-mstahl/Map.svelte"
+import Phyllotaxis from "../../components/tutorial-mstahl/Phyllotaxis.svelte"
 </script>
 
 <main>
@@ -25,19 +26,27 @@ import Map from "../../components/tutorial-mstahl/Map.svelte"
     <section class="voronoi">
         <h2>Voronoi</h2>  
         <Voronoi/>
+         <!---->
+    </section>
+
+    <section class="map">
+        <h2>Map</h2>  
+        <Map/>
         <!---->
     </section>
 
-    <section class="Map">
-        <h2>Map</h2>  
-        <Map/>
+    <section class="phyllotaxis">
+        <h2>Phyllotaxis</h2>  
+        <Phyllotaxis/>
+        <!--         -->
+    </section>
 </main>
 
 
 <style>
 
     main {
-        max-width: 768px;
+        max-width: 800px;
         margin: 50px auto 0px auto;   
     }
 
@@ -63,4 +72,6 @@ import Map from "../../components/tutorial-mstahl/Map.svelte"
         margin-bottom: 1rem;
         color: rgb(22, 22, 22)
     }
+
+
 </style>
