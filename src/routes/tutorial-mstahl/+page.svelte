@@ -50,6 +50,10 @@ import Phyllotaxis from "../../components/tutorial-mstahl/Phyllotaxis.svelte"
         margin: 50px auto 0px auto;   
     }
 
+    section {
+        padding-bottom: 40px;
+    }
+
     h1 {
         font-family: "Inter";
         font-size: 2.4rem;
