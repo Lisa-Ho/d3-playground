@@ -9,6 +9,7 @@
   <ul>
     <li><a href="tutorial-newline">Connor Rothschild/Newline</a></li>
     <li><a href="tutorial-mstahl">Matthias Stahl</a></li>
+    <li><a href="scrolly-starter">Scrollytelling Starter (by Connor)</a></li>
   </ul>
 
 </section>
