@@ -3,6 +3,3 @@
 </script>
    
 <Birdwatch/>
-   
-<style>
-</style>
