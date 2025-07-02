@@ -12,7 +12,13 @@ Deployed website [here](https://d3-playground.netlify.app/).
 - [Svelte starter on Github](https://github.com/higsch/svelte-d3-starter) (Matthias Stahl)
 - Connor Rothschild post on [Svelte and D3](https://connorrothschild.github.io/v3/post/svelte-and-d3)
 - [Overview of Svelte and D3 projects](https://awesome-svelte-and-d3.netlify.app/projects)
-- ([Svelte Charts](https://www.sveltecharts.com/)): Templates for charts in Svelte and D3 
+- ([Svelte Charts](https://www.sveltecharts.com/)): Templates for charts in Svelte and D3
+
+### Scrollytelling templates
+
+- svelte-scroller: [Github](https://github.com/sveltejs/svelte-scroller), [Demo](https://svelte.dev/playground/76846b7ae27b3a21becb64ffd6e9d4a6?version=5.34.9) (also used by Spiegel)
+- svelte-scrolly: [Demo](https://onsvisual.github.io/svelte-scrolly/), [Github](https://github.com/ONSvisual/svelte-scrolly) (ONS)
+- Scrollytelling component from Russell Goldenberg: [Starter Kit by Connor](https://www.sveltecharts.com/charts/01e9128d-7056-4de0-bfc2-242328f1aedf), [Demo](https://svelte.dev/playground/3d3736e634c9404ea8ec2ef7b87e2053?version=5.34.9) (also used by Pudding, Flore Perche)
 
 ### Tutorials
 
