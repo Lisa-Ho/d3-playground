@@ -8,7 +8,7 @@ const lineGenerator = line()
     .curve(curveBumpX);
 
 let width = 500;
-$: height = 550;
+$: height = 450;
 const pad = 15;
 
 $: xScale = scaleLinear()
@@ -17,7 +17,9 @@ $: xScale = scaleLinear()
 
 $: yScale = scaleLinear()
     .domain([1, 10])
-    .range([pad, height-pad]);
+    .range([pad*2.5, height-pad]);
+    
+let xTicks = [2022, 2023, 2024, 2025]
 
 let selectedRegion = "UK";
 
@@ -61,31 +63,22 @@ $: console.log(renderedData);
 <main> 
 <section class=header>
 <h1>Top 10 Birds</h1>
-<p> Explore the top 10 birds spotted in people's gardens 'in the UK, Northern Ireland, Scotland, and Wales from 2022 to 2025.</p>
+<p> Explore the top 10 birds spotted in people's gardens in the UK, Northern Ireland, Scotland, and Wales from 2022 to 2025.</p>
 </section>
 
-<section class="user-input">
-<!-- Dropdown to select region -->
- <div style="display: flex; align-items: center; justify-content: left; gap: 10px;"> 
-<label for="region-select">Select Region </label>
-<select bind:value={selectedRegion}>
-    <option value="UK">UK</option>
-    <option value="N Ireland">North Ireland</option>
-    <option value="Scotland">Scotland</option>
-    <option value="Wales">Wales</option>
-</select>
-</div>
-</section>
 
-<!-- 
-{#each renderedData as  {values}}
-{#each values as v}
-  <div>
-    <p>{v.Rank}</p>
-  </div>
-  {/each}
-{/each}
--->
+<section class="chart">
+
+    <div style="display: flex; align-items: center; justify-content: left; gap: 10px;"> 
+        <label for="region-select">Region </label>
+        <select bind:value={selectedRegion}>
+            <option value="UK">UK</option>
+            <option value="N Ireland">North Ireland</option>
+            <option value="Scotland">Scotland</option>
+            <option value="Wales">Wales</option>
+        </select>
+        </div>
+
 
 <div
     bind:clientWidth={width}
@@ -111,28 +104,43 @@ $: console.log(renderedData);
         fill="none"
     >
     </path>
-    {#each values as v}
-    <circle
+    <g> 
+        {#each xTicks as tick}
+        <text 
+            class="tick-labels"
+            x={xScale(tick)} 
+            y={pad}
+            dy="-8"
+            dominant-baseline="middle"
+            text-anchor="middle"
+            >{tick}
+            </text>
+        {/each}
+    </g>
+        {#each values as v}
+        <circle
         cx={v.x}
         cy={v.y}
         r="{0.45*Math.sqrt(width)}"
         fill={stroke} 
-    /> 
-    {/each}
+        /> 
+        {/each}
     {/each}
 </svg>
 </div>
+</section>
+
 </main>
 
 <style>
 
 main {
-        max-width: 1000px;
+        max-width: 800px;
         margin: 20px auto 0px auto;   
 }
 
 section {
-        padding-bottom: 20px;
+        padding-bottom: 15px;
     }
 
 h1 {
@@ -153,10 +161,19 @@ select {
 }
 
 .value-labels, label {
-    font-weight: 600;
+    font-weight: 400;
     dominant-baseline: middle;
     font-family: 'Inter', sans-serif;
 }
+
+
+.tick-labels {
+    font-family: 'Inter', sans-serif;
+    font-weight: 300; 
+    font-size: 0.8rem;
+    fill: rgb(69, 69, 69);
+}
+
 
 p{
         font-family: 'Inter', sans-serif;
