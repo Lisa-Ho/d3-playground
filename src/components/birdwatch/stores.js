@@ -7,4 +7,3 @@ const dataPath = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTmOGtlrqcibK2
 export const data = readable([], set => {
   csv(dataPath, autoType).then(d => set(d));
 });
-
