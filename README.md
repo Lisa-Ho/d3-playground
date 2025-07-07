@@ -4,7 +4,7 @@ Website made in Svelte hosting data visualisations made with D3.
 
 Deployed website [here](https://d3-playground.netlify.app/).
 
-## Helpful resources
+## Collection of resources
 
 ### Guides and templates
 
@@ -16,16 +16,16 @@ Deployed website [here](https://d3-playground.netlify.app/).
 
 ### Scrollytelling templates
 
-- svelte-scroller: [Github](https://github.com/sveltejs/svelte-scroller), [Demo](https://svelte.dev/playground/76846b7ae27b3a21becb64ffd6e9d4a6?version=5.34.9) (also used by Spiegel)
+- svelte-scroller: [Github](https://github.com/sveltejs/svelte-scroller), [Demo](https://svelte.dev/playground/76846b7ae27b3a21becb64ffd6e9d4a6?version=5.34.9)
 - svelte-scrolly: [Demo](https://onsvisual.github.io/svelte-scrolly/), [Github](https://github.com/ONSvisual/svelte-scrolly) (ONS)
-- Scrollytelling component from Russell Goldenberg: [Starter Kit by Connor](https://www.sveltecharts.com/charts/01e9128d-7056-4de0-bfc2-242328f1aedf), [Demo](https://svelte.dev/playground/3d3736e634c9404ea8ec2ef7b87e2053?version=5.34.9) (also used by Pudding, Flore Perche)
+- Scrollytelling component from Russell Goldenberg: [Starter Kit by Connor](https://www.sveltecharts.com/charts/01e9128d-7056-4de0-bfc2-242328f1aedf), [Demo](https://svelte.dev/playground/3d3736e634c9404ea8ec2ef7b87e2053?version=5.34.9) (also used by Pudding)
 
 ### Tutorials
 
 - [Svelte + D3 training](https://www.youtube.com/watch?v=2-Zw_QGTrlU&list=PLNvnDrMLMSipfbxSp1Z4v9Ydu2ud5i9V8&index=1) by Matthias Stahl on YouTube
 - [Your first data visualization with Svelte & D3](https://www.youtube.com/watch?v=-THp2YVYEFc) by Connor Rothschild for Newline on YouTube
 
-### Projects
+### Inspiration/Projects
 
 - Spiegel: Nobel Laureates ([Project](https://www.spiegel.de/wissenschaft/zirkel-der-genies-a-90c50289-30ac-4a4b-bc49-348676ce6687), [Code](https://github.com/spiegelgraphics/nobel-laureates/tree/main))
 - Jess Voiture for Pudding: Vogue magazine covers ([Project](https://mag-text.vercel.app/), [Code](https://github.com/jessvoiture/mag-text/tree/main))
