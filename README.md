@@ -1,8 +1,8 @@
 # About this repo
 
-Website made in Svelte hosting data visualisations made with D3. 
+Website made in Svelte hosting data visualisations made with D3 (deployed [here](https://d3-playground.netlify.app/)).
 
-Deployed website [here](https://d3-playground.netlify.app/).
+A mix of tutorials and experimental stuff. Site structure and folders a bit of a mess, don't judge too harshly :D
 
 ## Collection of resources
 
