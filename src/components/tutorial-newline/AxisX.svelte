@@ -14,7 +14,6 @@
         dominant-baseline="hanging"
         >{tick}%
         </text>
-        
     {/each}
 </g>
 
