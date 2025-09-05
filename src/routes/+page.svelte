@@ -3,6 +3,14 @@
 </script>
 
 <Header/>
+<section id="experiments">
+  <h2>Experiments</h2>
+  <ul>
+    <li>
+      <a href="lazy-cats">Lazy cats v0</a>
+    </li>
+  </ul>
+</section>
 
 <section id="demo-link">
 	<h2>Tutorials</h2>
@@ -11,7 +19,6 @@
     <li><a href="tutorial-mstahl">Matthias Stahl</a></li>
     <li><a href="scrolly-starter">Scrollytelling Starter (by Connor)</a></li>
   </ul>
-
 </section>
 
 
