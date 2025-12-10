@@ -3,7 +3,7 @@
     import CatStand from "./CatStand.svelte";
     import CatSit from "./CatSit.svelte";
     import CatSleep from "./CatSleep.svelte";
-    import cats from "./cats.json";
+    import cats from "./cats_test.json";
     import * as d3 from "d3";
 
     const colr_dict = {
